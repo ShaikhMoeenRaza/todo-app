@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Todo List</title>
+    <link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Todo List</h1>
+        </header>
+
+        <div class="form-container">
+            <h2>Add New Todo</h2>
+            <form action="/todos/add" method="POST">
+                <input type="text" name="name" placeholder="Enter your todo" required class="input-field">
+                <input type="date" name="dueDate" class="input-field">
+                <select name="priority" class="input-field">
+                    <option value="Low">Low</option>
+                    <option value="Medium">Medium</option>
+                    <option value="High">High</option>
+                </select>
+                <button type="submit" class="submit-btn">Add Todo</button>
+            </form>
+        </div>
+
+        <div class="todo-list">
+            <h2>All Todos</h2>
+            <ul>
+                <% todos.forEach(todo => { %>
+                    <li class="todo-item">
+                        <div class="todo-info">
+                            <strong><%= todo.name %></strong>
+                            <span class="todo-status <%= todo.status.toLowerCase() %>"><%= todo.status %></span>
+                        </div>
+                        <div class="todo-details">
+                            <span>Due: <%= todo.dueDate ? new Date(todo.dueDate).toLocaleDateString() : 'No due date' %></span>
+                            <span>Priority: <%= todo.priority %></span>
+                        </div>
+                    </li>
+                <% }); %>
+            </ul>
+        </div>
+    </div>
+</body>
+</html>
