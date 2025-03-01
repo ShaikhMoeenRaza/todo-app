@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Todo Update</title>
+  <style>
+    body, html {
+      height: 100%;
+      margin: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-family: Arial, sans-serif;
+    }
+
+    .container {
+      background-color: #f9f9f9;
+      padding: 20px;
+      border-radius: 8px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      width: 400px; /* Adjust width of the form */
+      text-align: center;
+    }
+
+    h2 {
+      margin-bottom: 20px;
+    }
+
+    form div {
+      margin-bottom: 10px;
+    }
+
+    form input, form select, form button {
+      width: 100%;
+      padding: 10px;
+      margin: 5px 0;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+    }
+
+    form button {
+      background-color: #4CAF50;
+      color: white;
+      border: none;
+      cursor: pointer;
+      text-align: center;
+      padding: 12px;
+      border-radius: 5px;
+    }
+
+    form button:hover {
+      background-color: #45a049;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    <h2>Update Todo</h2>
+    <form action="/update/<%= todo._id %>" method="POST">
+      <div>
+        <label for="name">Todo Name</label>
+        <input type="text" id="name" name="name" value="<%= todo.name %>" required>
+      </div>
+      <div>
+        <label for="status">Status</label>
+        <select id="status" name="status">
+          <option value="Pending" <%= todo.status === 'Pending' ? 'selected' : '' %>>Pending</option>
+          <option value="Completed" <%= todo.status === 'Completed' ? 'selected' : '' %>>Completed</option>
+        </select>
+      </div>
+      <div>
+        <label for="dueDate">Due Date</label>
+        <input type="date" id="dueDate" name="dueDate" value="<%= todo.dueDate ? new Date(todo.dueDate).toISOString().split('T')[0] : '' %>">
+      </div>
+      <div>
+        <label for="priority">Priority</label>
+        <select id="priority" name="priority">
+          <option value="Low" <%= todo.priority === 'Low' ? 'selected' : '' %>>Low</option>
+          <option value="Medium" <%= todo.priority === 'Medium' ? 'selected' : '' %>>Medium</option>
+          <option value="High" <%= todo.priority === 'High' ? 'selected' : '' %>>High</option>
+        </select>
+      </div>
+      <button type="submit">Update Todo</button>
+    </form>
+  </div>
+
+</body>
+</html>

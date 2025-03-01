@@ -1,11 +1,22 @@
-const express = require('express');
+const express = require("express");
 const Router = express.Router();
 
-const {addTodoContent,getAllTodoList} = require("../controller/todocontroller.js");
+const {
+  addTodoContent,
+  getAllTodoList,
+  delTodo,
+  RetrieveSingleRecord,
+  updateTodo,
+} = require("../controller/todocontroller.js");
 
-Router.get('/todos',getAllTodoList);
+Router.get("/todos", getAllTodoList);
 
-Router.post('/add',addTodoContent)
+Router.post("/add", addTodoContent);
+
+Router.post("/deltodo/:id", delTodo);
+
+Router.get("/update/:id", RetrieveSingleRecord);
+
+Router.post("/update/:id", updateTodo);
 
 module.exports = Router;
-
