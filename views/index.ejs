@@ -1,181 +1,202 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Todo List</title>
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
 
-        body, html {
-            height: 100%;
-            font-family: Arial, sans-serif;
-            display: flex; 
-            justify-content: center;
-            align-items: center; 
-            background-color: #f4f4f4;
-        }
+      body,
+      html {
+        height: 100%;
+        font-family: Arial, sans-serif;
+        display: flex;
+        justify-content: center;
+        align-items: flex-start; 
+        background-color: #f4f4f4;
+        padding: 25px;
+      }
 
-        .container {
-            width: 80%; 
-            max-width: 800px; 
-            background-color: white;
-            border-radius: 8px; 
-            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1); 
-            padding: 20px;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-        }
+      .container {
+        width: 100%;
+        max-width: 1500px;
+        background-color: lightblue;
+        border-radius: 10px;
+        box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+        padding: 25px;
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-start;
+        align-items: center;
+      }
 
-        header {
-            text-align: center;
-            margin-bottom: 20px;
-        }
+      header {
+        text-align: center;
+        margin-bottom: 20px;
+      }
 
-        h1 {
-            font-size: 2rem;
-            color: #333;
-        }
+      h1 {
+        font-size: 2rem;
+        color: #333;
+      }
 
-        .form-container {
-            width: 100%;
-            text-align: center;
-            margin-bottom: 40px;
-        }
+      .form-container {
+        width: 100%;
+        text-align: center;
+        margin-bottom: 40px;
+      }
 
-        h2 {
-            font-size: 1.5rem;
-            margin-bottom: 10px;
-            color: #333;
-        }
+      h2 {
+        font-size: 1.5rem;
+        margin-bottom: 10px;
+        color: #333;
+      }
 
-        .input-field {
-            width: 100%;
-            padding: 10px;
-            margin: 5px 0;
-            border: 1px solid #ccc;
-            border-radius: 4px;
-        }
+      .input-field {
+        width: 100%;
+        padding: 10px;
+        margin: 5px 0;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+      }
 
-        .submit-btn {
-            background-color: #4CAF50;
-            color: white;
-            padding: 12px 20px;
-            border: none;
-            border-radius: 4px;
-            cursor: pointer;
-            margin-top: 10px;
-        }
+      .submit-btn {
+        background-color: #4caf50;
+        color: white;
+        padding: 12px 20px;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+        margin-top: 10px;
+      }
 
-        .submit-btn:hover {
-            background-color: #45a049;
-        }
+      .submit-btn:hover {
+        background-color: #45a049;
+      }
 
-        .todo-list {
-            width: 100%;
-        }
+      .todo-list {
+        width: 100%;
+      }
 
-        ul {
-            list-style-type: none;
-        }
+      ul {
+        list-style-type: none;
+        padding: 0; /* Remove padding for better layout */
+      }
 
-        .todo-item {
-            background-color: #f9f9f9;
-            padding: 15px;
-            margin: 10px 0;
-            border-radius: 8px;
-            box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
-        }
+      .todo-item {
+        background-color: #f9f9f9;
+        padding: 15px;
+        margin: 10px 0;
+        border-radius: 8px;
+        box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
+      }
 
-        .todo-info {
-            display: flex;
-            justify-content: space-between;
-        }
+      .todo-info {
+        display: flex;
+        justify-content: space-between;
+      }
 
-        .todo-status {
-            font-weight: bold;
-        }
+      .todo-status {
+        font-weight: bold;
+      }
 
-        .todo-details {
-            margin-top: 10px;
-        }
+      .todo-details {
+        margin-top: 10px;
+      }
 
-        .update-btn, .delete-btn {
-            display: inline-block;
-            padding: 8px 15px;
-            margin: 5px;
-            text-decoration: none;
-            border-radius: 4px;
-            cursor: pointer;
-        }
+      .update-btn,
+      .delete-btn {
+        display: inline-block;
+        padding: 8px 15px;
+        margin: 5px;
+        text-decoration: none;
+        border-radius: 4px;
+        cursor: pointer;
+      }
 
-        .update-btn {
-            background-color: #2196F3;
-            color: white;
-        }
+      .update-btn {
+        background-color: #2196f3;
+        color: white;
+      }
 
-        .update-btn:hover {
-            background-color: #0b7dda;
-        }
+      .update-btn:hover {
+        background-color: #0b7dda;
+      }
 
-        .delete-btn {
-            background-color: #f44336;
-            color: white;
-        }
+      .delete-btn {
+        background-color: #f44336;
+        color: white;
+      }
 
-        .delete-btn:hover {
-            background-color: #e41c2b;
-        }
+      .delete-btn:hover {
+        background-color: #e41c2b;
+      }
     </style>
-</head>
-<body>
+  </head>
+  <body>
     <div class="container">
-        <header>
-            <h1>Todo List</h1>
-        </header>
+      <header>
+        <h1>Todo List</h1>
+      </header>
 
-        <div class="form-container">
-            <h2>Add New Todo</h2>
-            <form action="/todos/add" method="POST">
-                <input type="text" name="name" placeholder="Enter your todo" required class="input-field">
-                <input type="date" name="dueDate" class="input-field">
-                <select name="priority" class="input-field">
-                    <option value="Low">Low</option>
-                    <option value="Medium">Medium</option>
-                    <option value="High">High</option>
-                </select>
-                <button type="submit" class="submit-btn">Add Todo</button>
+      <div class="todo-list">
+        <h2>All Todos</h2>
+        <ul>
+          <% if (todos && todos.length > 0) { %>
+             <% todos.forEach(todo => { %>
+          <li class="todo-item">
+            <div class="todo-info">
+              <strong><%= todo.name %></strong>
+              <span class="todo-status <%= todo.status.toLowerCase() %>"
+                ><%= todo.status %></span
+              >
+            </div>
+            <div class="todo-details">
+              <span
+                >Due: <%= todo.dueDate ? new
+                Date(todo.dueDate).toLocaleDateString() : 'No due date' %></span
+              >
+              <span>Priority: <%= todo.priority %></span>
+            </div>
+            <a href="/update/<%= todo._id %>" class="update-btn">Update Todo</a>
+            <form
+              action="/deltodo/<%= todo._id %>"
+              method="POST"
+              onsubmit="return confirm('Are you sure you want to delete this item?')"
+            >
+              <button type="submit" class="delete-btn">Delete</button>
             </form>
-        </div>
+          </li>
+          <% }); %> <% } else { %>
+          <li>No Todos to display</li>
+          <% } %>
+        </ul>
+      </div>
 
-        <div class="todo-list">
-            <h2>All Todos</h2>
-            <ul>
-                <% todos.forEach(todo => { %>
-                    <li class="todo-item">
-                        <div class="todo-info">
-                            <strong><%= todo.name %></strong>
-                            <span class="todo-status <%= todo.status.toLowerCase() %>"><%= todo.status %></span>
-                        </div>
-                        <div class="todo-details">
-                            <span>Due: <%= todo.dueDate ? new Date(todo.dueDate).toLocaleDateString() : 'No due date' %></span>
-                            <span>Priority: <%= todo.priority %></span>
-                        </div>
-
-                        <a href="/update/<%= todo.id %>" class="update-btn">Update Todo</a>
-                        <form action="/deltodo/<%= todo.id %>" method="POST" onsubmit="return confirm('Are you sure you want to delete this item?')">
-                            <button type="submit" class="delete-btn">Delete</button>
-                        </form>
-                    </li>
-                <% }); %>
-            </ul>
-        </div>
+      <div class="form-container">
+        <h2>Add New Todo</h2>
+        <form action="/add" method="POST">
+          <input
+            type="text"
+            name="name"
+            placeholder="Enter your todo"
+            required
+            class="input-field"
+          />
+          <input type="date" name="dueDate" class="input-field" />
+          <select name="priority" class="input-field">
+            <option value="Low">Low</option>
+            <option value="Medium">Medium</option>
+            <option value="High">High</option>
+          </select>
+          <button type="submit" class="submit-btn">Add Todo</button>
+        </form>
+      </div>
     </div>
-</body>
+  </body>
 </html>

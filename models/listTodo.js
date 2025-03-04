@@ -20,6 +20,11 @@ const todoSchema = new mongoose.Schema(
       enum: ["Low", "Medium", "High"],
       default: "Medium",
     },
+    user: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "User",
+      required: true,
+    },
   },
   {
     timestamps: true,
@@ -28,5 +33,5 @@ const todoSchema = new mongoose.Schema(
 const Todo = mongoose.model("Todo", todoSchema);
 
 module.exports = {
-  Todo
+  Todo,
 };

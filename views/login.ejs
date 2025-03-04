@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Login & Register</title>
+
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body,
+      html {
+        height: 100%;
+        font-family: Arial, sans-serif;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background-color: #f4f4f4;
+      }
+
+      .container {
+        width: 90%;
+        max-width: 500px;
+        background-color: white;
+        border-radius: 8px;
+        box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+        padding: 20px;
+      }
+
+      h1 {
+        font-size: 2rem;
+        color: #333;
+        text-align: center;
+      }
+
+      .form-container {
+        width: 100%;
+        text-align: center;
+      }
+
+      input[type="text"],
+      input[type="password"],
+      input[type="email"] {
+        width: 100%;
+        padding: 10px;
+        margin: 10px 0;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+      }
+
+      button {
+        background-color: #4caf50;
+        color: white;
+        padding: 12px 20px;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+        width: 100%;
+        margin-top: 10px;
+      }
+
+      button:hover {
+        background-color: #45a049;
+      }
+
+      .toggle-btn {
+        margin-top: 10px;
+        color: #2196f3;
+        cursor: pointer;
+      }
+
+      .toggle-btn:hover {
+        text-decoration: underline;
+      }
+
+      .form-container p {
+        color: #333;
+        font-size: 1rem;
+      }
+
+      .error {
+        color: red;
+        font-size: 0.9rem;
+        margin: 10px 0;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <h1>Welcome to Todo List</h1>
+
+      <div class="login-form form-container" id="login-form">
+        <h2>Login</h2>
+
+        <!-- Error message container -->
+        <% if (error) { %>
+        <div class="error"><%= error %></div>
+        <% } %>
+
+        <form action="/login" method="POST">
+          <input
+            type="text"
+            name="username"
+            placeholder="Enter Username"
+            required
+          />
+          <input
+            type="password"
+            name="password"
+            placeholder="Enter Password"
+            required
+          />
+
+          <button type="submit">Login</button>
+        </form>
+
+        <p>
+          Don't Have An Account?
+          <span class="toggle-btn" onclick="toggleForms()">Register</span>
+        </p>
+      </div>
+
+      <div class="form-container" id="register-form" style="display: none">
+        <h2>Register</h2>
+
+        <form action="/register" method="POST">
+          <input
+            type="text"
+            name="name"
+            id="name"
+            placeholder="Enter name"
+            required
+          />
+          <input
+            type="text"
+            name="username"
+            id="username"
+            placeholder="Enter Username"
+            required
+          />
+          <input
+            type="email"
+            name="email"
+            id="email"
+            placeholder="Enter Email"
+            required
+          />
+          <input
+            type="password"
+            name="password"
+            id="password"
+            placeholder="Enter Password"
+            required
+          />
+
+          <button type="submit">Register</button>
+        </form>
+
+        <p>
+          Already have An Account?
+          <span class="toggle-btn" onclick="toggleForms()">Login</span>
+        </p>
+      </div>
+    </div>
+
+    <script>
+      // Toggle between login and register forms
+      function toggleForms() {
+        const loginForm = document.getElementById("login-form");
+        const registerForm = document.getElementById("register-form");
+
+        if (loginForm.style.display === "none") {
+          loginForm.style.display = "block";
+          registerForm.style.display = "none";
+        } else {
+          loginForm.style.display = "none";
+          registerForm.style.display = "block";
+        }
+      }
+    </script>
+  </body>
+</html>

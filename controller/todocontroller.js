@@ -1,15 +1,30 @@
 const { Todo } = require("../models/listTodo");
 
-const getAllTodoList = async (req, res) => {
+const getDashboard = async (req, res) => {
   try {
-    const retrieveAllTodo = await Todo.find({});
-
-    res.status(200).render("index", { todos: retrieveAllTodo });
+    res.status(200).render("dashboard");
   } catch (err) {
-    res.status(500).json({
-      message: "Error fetching todos",
-      error: err,
-    });
+    console.log(err);
+    res.status(500).send("Error While Fetching Dashboard Page");
+  }
+};
+const getAllTodoList = async (req, res) => {
+  if (!req.session || !req.session.user) {
+    return res.redirect("/login");
+  }
+
+  const user = req.session.user;
+  try {
+    if (user.role === "admin") {
+      const todos = await Todo.find({});
+    } else {
+      const todos = await Todo.find({ user: user._id });
+    }
+    const todos = await Todo.find({});
+    res.render("index", { todos });
+  } catch (err) {
+    console.error("Error fetching todos:", err);
+    res.status(500).send("Error retrieving todos");
   }
 };
 
@@ -20,11 +35,17 @@ const addTodoContent = async (req, res) => {
     const normalizedStatus =
       status.trim().toLowerCase() === "completed" ? "Completed" : "Pending";
 
+      if(!req.session.user){
+        return res.status(401).send('Unauthorized: User must be logged in');
+      }
+      const userId= req.session.user._id;
+
     const newTodo = await Todo.create({
       name,
       dueDate,
       priority,
       status: normalizedStatus,
+      user: userId
     });
 
     res.redirect("/todos");
@@ -86,7 +107,7 @@ const updateTodo = async (req, res) => {
         message: "Todo not found",
       });
     }
-    res.redirect('/todos');
+    res.redirect("/todos");
   } catch (err) {
     res.status(500).json({
       status: false,
@@ -100,5 +121,6 @@ module.exports = {
   addTodoContent,
   delTodo,
   RetrieveSingleRecord,
-  updateTodo
+  updateTodo,
+  getDashboard,
 };
